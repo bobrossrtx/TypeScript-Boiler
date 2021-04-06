@@ -1,10 +1,23 @@
-let userArr: any = [];   // Array for containing users
-let id: number = 0;      // Beginning ID
+let userArr:any = []
+
+class Users {
+    users: Map<any, any>;
+    
+    constructor() {
+        this.users = new Map()
+    }
+
+    addUser(user: User) {
+        userArr.push(
+            user
+        )
+    }
+}
 
 class User {
-    username: string;
-    email: string;
-    age: number;
+    username;
+    email;
+    age;
 
     constructor(username: string, email: string, age: number) {
         this.username = username;
@@ -12,83 +25,60 @@ class User {
         this.age = age;
     }
 
-    addUser() {
-        userArr.push({
-            id: id,
-            username: this.username,
-            email: this.email,
-            age: this.age
-        });
-        id++;
+    setUsername(username: string) {
+        this.username = username;
+
+        return this;
+    }
+
+    setEmail(email: string) {
+        this.email = email;
+
+        return this;
+    }
+
+    setAge(age: number) {
+        this.age = age;
+
+        return this;
+    }
+
+    getUsername() {
+        return this.username;
+    }
+
+    getEmail() {
+        return this.email;
+    }
+
+    getAge() {
+        return this.age;
+    }
+    
+    id() {
+        return this.email + '-' + this.age + '.' + this.username;
     }
 }
 
-class UserEdit {
-    id: number;
-    field: string;
-    value: string | number;
+const users = new Users();
 
-    constructor(id: number, field: string, value: string | number) {
-        this.id = id;;
-        this.field = field;
-        this.value = value;
-    }
+const owen = new User(
+    "Owen",
+    "owen@gmail.com",
+    14
+);
+    
+const bob = new User(
+    "Bob",
+    "bob@gmail.com",
+    14
+);
 
-    updateUser() {
-        // if (this.field === "username") {
-        //     userArr[this.id] = {
-        //         id: userArr[this.id]["id"],
-        //         username: this.value,
-        //         email: userArr[this.id]["email"],
-        //         age: userArr[this.id]["age"]
-        //     }
-        // } else if (this.field === "email") {
-        //     userArr[this.id] = {
-        //         id: userArr[this.id]["id"],
-        //         username: userArr[this.id]["username"],
-        //         email: this.value,
-        //         age: userArr[this.id]["age"]
-        //     }
-        // }
-        if (this.field === "age") {
-            userArr[this.id] = {
-                id: userArr[this.id]["id"],
-                username: userArr[this.id]["username"],
-                email: userArr[this.id]["email"],
-                age: this.value
-            }
-        }
-        if (this.field === "email") {
-            userArr[this.id] = {
-                id: userArr[this.id]["id"],
-                username: userArr[this.id]["username"],
-                email: this.value,
-                age: userArr[this.id]["age"]
-            }
-        }
-        if (this.field === "username") {
-            userArr[this.id] = {
-                id: userArr[this.id]["id"],
-                username: this.value,
-                email: userArr[this.id]["email"],
-                age: userArr[this.id]["age"]
-            }
-        }
-    }
+users.addUser(owen);
+users.addUser(bob);
+
+for (let i = 0; i < userArr.length; i++) {
+    console.log(i + ":")
+    console.log(userArr[i])
+    console.log("\r\n")
 }
-
-const bobrossrtx = new User("Bobrossrtx", "bobrossrtx@gmail.com", 14);
-bobrossrtx.addUser();
-const googlaz = new User("Googlaz", "giz@mail.com", 22);
-googlaz.addUser();
-
-console.log("\n first");
-console.log(userArr);
-
-const bobrossrtxEdit = new UserEdit(0, "username", "BobrossrtxEdit");
-bobrossrtxEdit.updateUser();
-const googlazEdit = new UserEdit(1, "age", 23);
-googlazEdit.updateUser();
-
-console.log("\n Second");
-console.log(userArr);
