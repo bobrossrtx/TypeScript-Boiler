@@ -1,67 +1,53 @@
 var userArr = [];
-var id = 0;
+var Users = (function () {
+    function Users() {
+        this.users = new Map();
+    }
+    Users.prototype.addUser = function (user) {
+        userArr.push(user);
+    };
+    return Users;
+}());
 var User = (function () {
     function User(username, email, age) {
         this.username = username;
         this.email = email;
         this.age = age;
     }
-    User.prototype.addUser = function () {
-        userArr.push({
-            id: id,
-            username: this.username,
-            email: this.email,
-            age: this.age
-        });
-        id++;
+    User.prototype.setUsername = function (username) {
+        this.username = username;
+        return this;
+    };
+    User.prototype.setEmail = function (email) {
+        this.email = email;
+        return this;
+    };
+    User.prototype.setAge = function (age) {
+        this.age = age;
+        return this;
+    };
+    User.prototype.getUsername = function () {
+        return this.username;
+    };
+    User.prototype.getEmail = function () {
+        return this.email;
+    };
+    User.prototype.getAge = function () {
+        return this.age;
+    };
+    User.prototype.id = function () {
+        return this.email + '-' + this.age + '.' + this.username;
     };
     return User;
 }());
-var UserEdit = (function () {
-    function UserEdit(id, field, value) {
-        this.id = id;
-        ;
-        this.field = field;
-        this.value = value;
-    }
-    UserEdit.prototype.updateUser = function () {
-        if (this.field === "age") {
-            userArr[this.id] = {
-                id: userArr[this.id]["id"],
-                username: userArr[this.id]["username"],
-                email: userArr[this.id]["email"],
-                age: this.value
-            };
-        }
-        if (this.field === "email") {
-            userArr[this.id] = {
-                id: userArr[this.id]["id"],
-                username: userArr[this.id]["username"],
-                email: this.value,
-                age: userArr[this.id]["age"]
-            };
-        }
-        if (this.field === "username") {
-            userArr[this.id] = {
-                id: userArr[this.id]["id"],
-                username: this.value,
-                email: userArr[this.id]["email"],
-                age: userArr[this.id]["age"]
-            };
-        }
-    };
-    return UserEdit;
-}());
-var bobrossrtx = new User("Bobrossrtx", "bobrossrtx@gmail.com", 14);
-bobrossrtx.addUser();
-var googlaz = new User("Googlaz", "giz@mail.com", 22);
-googlaz.addUser();
-console.log("\n first");
-console.log(userArr);
-var bobrossrtxEdit = new UserEdit(0, "username", "BobrossrtxEdit");
-bobrossrtxEdit.updateUser();
-var googlazEdit = new UserEdit(1, "age", 23);
-googlazEdit.updateUser();
-console.log("\n Second");
-console.log(userArr);
+var users = new Users();
+var owen = new User("Owen", "owen@gmail.com", 14);
+var bob = new User("Bob", "bob@gmail.com", 14);
+users.addUser(owen);
+users.addUser(bob);
+for (var i = 0; i < userArr.length; i++) {
+    console.log(i + ":");
+    console.log(userArr[i]);
+    console.log("\r\n");
+}
 //# sourceMappingURL=index.js.map
