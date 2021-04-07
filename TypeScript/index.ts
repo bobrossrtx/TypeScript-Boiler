@@ -4,13 +4,21 @@ class Users {
     users: Map<any, any>;
     
     constructor() {
-        this.users = new Map()
+        this.users = new Map();
     }
 
     addUser(user: User) {
         userArr.push(
             user
-        )
+        );
+    }
+
+    getUser(id: number) {
+        return userArr[id];
+    }
+
+    editUser(id: number, user: User) {
+        userArr[id] = user;
     }
 }
 
@@ -27,19 +35,16 @@ class User {
 
     setUsername(username: string) {
         this.username = username;
-
         return this;
     }
 
     setEmail(email: string) {
         this.email = email;
-
         return this;
     }
 
     setAge(age: number) {
         this.age = age;
-
         return this;
     }
 
@@ -65,7 +70,7 @@ const users = new Users();
 const owen = new User(
     "Owen",
     "owen@gmail.com",
-    14
+    14,
 );
     
 const bob = new User(
@@ -74,11 +79,29 @@ const bob = new User(
     14
 );
 
+const updateMe = new User(
+    "UpdateMe",
+    "update.me@gmail.com",
+    100
+)
+
 users.addUser(owen);
 users.addUser(bob);
+users.addUser(updateMe);
 
 for (let i = 0; i < userArr.length; i++) {
-    console.log(i + ":")
-    console.log(userArr[i])
-    console.log("\r\n")
+    console.log(i + ":", userArr[i], "\r\n");
 }
+
+console.log(`\r\nUser Searched:`, users.getUser(1));
+
+const updated = new User(
+    "Updated",
+    "updated@gmail.com",
+    101
+);
+
+users.editUser(2, updated);
+
+const updatedId = 2;
+console.log(`\r\nUpdated: ${updatedId}`, users.getUser(updatedId));
