@@ -1,64 +1,62 @@
-var userArr = [];
-var Users = (function () {
-    function Users() {
+let userArr = [];
+class Users {
+    constructor() {
         this.users = new Map();
     }
-    Users.prototype.addUser = function (user) {
+    addUser(user) {
         userArr.push(user);
-    };
-    Users.prototype.getUser = function (id) {
+    }
+    getUser(id) {
         return userArr[id];
-    };
-    Users.prototype.editUser = function (id, user) {
+    }
+    editUser(id, user) {
         userArr[id] = user;
-    };
-    return Users;
-}());
-var User = (function () {
-    function User(username, email, age) {
+    }
+}
+class User {
+    constructor(username, email, age) {
         this.username = username;
         this.email = email;
         this.age = age;
     }
-    User.prototype.setUsername = function (username) {
+    setUsername(username) {
         this.username = username;
         return this;
-    };
-    User.prototype.setEmail = function (email) {
+    }
+    setEmail(email) {
         this.email = email;
         return this;
-    };
-    User.prototype.setAge = function (age) {
+    }
+    setAge(age) {
         this.age = age;
         return this;
-    };
-    User.prototype.getUsername = function () {
+    }
+    getUsername() {
         return this.username;
-    };
-    User.prototype.getEmail = function () {
+    }
+    getEmail() {
         return this.email;
-    };
-    User.prototype.getAge = function () {
+    }
+    getAge() {
         return this.age;
-    };
-    User.prototype.id = function () {
+    }
+    id() {
         return this.email + '-' + this.age + '.' + this.username;
-    };
-    return User;
-}());
-var users = new Users();
-var owen = new User("Owen", "owen@gmail.com", 14);
-var bob = new User("Bob", "bob@gmail.com", 14);
-var updateMe = new User("UpdateMe", "update.me@gmail.com", 100);
+    }
+}
+const users = new Users();
+const owen = new User("Owen", "owen@gmail.com", 14);
+const bob = new User("Bob", "bob@gmail.com", 14);
+const updateMe = new User("UpdateMe", "update@update.me", 100);
 users.addUser(owen);
 users.addUser(bob);
 users.addUser(updateMe);
-for (var i = 0; i < userArr.length; i++) {
+for (let i = 0; i < userArr.length; i++) {
     console.log(i + ":", userArr[i], "\r\n");
 }
-console.log("\r\nUser Searched:", users.getUser(1));
-var updated = new User("Updated", "updated@gmail.com", 101);
+console.log(`\r\nUser Searched:`, users.getUser(1));
+const updated = new User("Updated", "updated@gmail.com", 101);
 users.editUser(2, updated);
-var updatedId = 2;
-console.log("\r\nUpdated: " + updatedId, users.getUser(updatedId));
+const updatedId = 2;
+console.log(`\r\nUpdated: ${updatedId}`, users.getUser(updatedId));
 //# sourceMappingURL=index.js.map
