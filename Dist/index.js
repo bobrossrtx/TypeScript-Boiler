@@ -6,6 +6,12 @@ var Users = (function () {
     Users.prototype.addUser = function (user) {
         userArr.push(user);
     };
+    Users.prototype.getUser = function (id) {
+        return userArr[id];
+    };
+    Users.prototype.editUser = function (id, user) {
+        userArr[id] = user;
+    };
     return Users;
 }());
 var User = (function () {
@@ -43,11 +49,16 @@ var User = (function () {
 var users = new Users();
 var owen = new User("Owen", "owen@gmail.com", 14);
 var bob = new User("Bob", "bob@gmail.com", 14);
+var updateMe = new User("UpdateMe", "update.me@gmail.com", 100);
 users.addUser(owen);
 users.addUser(bob);
+users.addUser(updateMe);
 for (var i = 0; i < userArr.length; i++) {
-    console.log(i + ":");
-    console.log(userArr[i]);
-    console.log("\r\n");
+    console.log(i + ":", userArr[i], "\r\n");
 }
+console.log("\r\nUser Searched:", users.getUser(1));
+var updated = new User("Updated", "updated@gmail.com", 101);
+users.editUser(2, updated);
+var updatedId = 2;
+console.log("\r\nUpdated: " + updatedId, users.getUser(updatedId));
 //# sourceMappingURL=index.js.map
