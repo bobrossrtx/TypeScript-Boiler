@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
-        "module": "system",
+        "target": "ES6",
+        "module": "commonJS",
         "noImplicitAny": true,
         "removeComments": true,
         "preserveConstEnums": true,
